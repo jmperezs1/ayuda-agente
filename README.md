@@ -71,6 +71,16 @@ si únicamente quieres ver la interfaz, este es el camino corto.
 
 ---
 
+## Procedencia
+
+Las dos mitades se desarrollaron por separado durante el hackathon y se reunieron aquí. Su historial
+completo, commit a commit, sigue en sus repositorios de origen:
+
+- `backend/` — [djimenezm2/back-hackaton-CTW-2026](https://github.com/djimenezm2/back-hackaton-CTW-2026)
+- `frontend/` — [juanse-ai/ayuda-agente](https://github.com/juanse-ai/ayuda-agente)
+
+Este monorepo es la copia que se lee y se ejecuta; los cambios de aquí en adelante van aquí.
+
 ## Documentación
 
 La decisiones de arquitectura, la estrategia de búsqueda y los runbooks viven en el backend:
