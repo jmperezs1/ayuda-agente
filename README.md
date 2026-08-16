@@ -1,4 +1,17 @@
+<div align="center">
+
 # AyudAgente
+
+### 🟢 La app está en vivo en **[ayudagente.help](https://ayudagente.help)**
+
+[![Abrir la app](https://img.shields.io/badge/ABRIR%20LA%20APP-ayudagente.help-1f6feb?style=for-the-badge)](https://ayudagente.help)
+
+**Ábrela y ya está** — el mapa, el grafo y el chat, contra el backend de producción.<br>
+No hace falta clonar ni levantar nada.
+
+</div>
+
+---
 
 **Un agente autónomo para las primeras 72 horas de un desastre.** Vigila las emergencias, decide
 dónde mirar, lee lo que la gente publica y lo convierte en un mapa de quién necesita qué y quién lo
@@ -15,8 +28,8 @@ submódulos, cada una clavada a un commit de su repositorio de origen.
 Todo lo que se ve en el mapa sale del backend: una sola llamada a `GET /api/events/<id>/graph/` trae
 los actores de la emergencia, lo que piden u ofrecen y los emparejamientos entre ellos.
 
-**Demo en vivo: [ayudagente.help](https://ayudagente.help)** — el frontend desplegado en Vercel,
-contra el backend de producción. Lo de abajo es para ejecutarlo en local.
+Lo que sigue es para ejecutarlo en local. Si solo quieres verlo funcionando, está desplegado y
+abierto en **[ayudagente.help](https://ayudagente.help)**.
 
 ---
 
