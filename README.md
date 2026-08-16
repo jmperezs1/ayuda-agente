@@ -79,6 +79,15 @@ completo, commit a commit, sigue en sus repositorios de origen:
 - `backend/` — [djimenezm2/back-hackaton-CTW-2026](https://github.com/djimenezm2/back-hackaton-CTW-2026)
 - `frontend/` — [juanse-ai/ayuda-agente](https://github.com/juanse-ai/ayuda-agente)
 
+Los mismos dos repositorios están enganchados como submódulos bajo `origins/`, cada uno clavado al
+commit del que salió esta copia. Son solo una referencia navegable: **el código que se ejecuta es el
+de `backend/` y `frontend/`**, y un `git clone` normal lo trae entero sin tocar nada de `origins/`.
+Para traerse también el historial de origen:
+
+```bash
+git submodule update --init origins/backend origins/frontend
+```
+
 Este monorepo es la copia que se lee y se ejecuta; los cambios de aquí en adelante van aquí.
 
 ## Documentación
