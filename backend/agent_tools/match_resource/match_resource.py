@@ -171,7 +171,9 @@ def match_resource(
     too coarse to hold. Omit both to see everything open, which is how to start when you
     do not yet know which resource key to ask for.
 
-    Results come nearest first when you give a place, and by urgency otherwise.
+    Results come nearest first when you give a place, and by urgency otherwise. A place
+    orders the whole event rather than cutting it down to that municipality — somebody in
+    Pereira needs the closest shelter there is, not only one inside Pereira.
 
     Read `still_needed`, not the raw amount: it already subtracts what other people have
     promised. A row with `still_needed` 0 is being handled — sending someone there wastes
@@ -223,7 +225,8 @@ def match_resource(
             event_id=event_id,
             direction=direction,
             resource=resource,
-            admin_unit=admin_unit,
+            # A place we can measure from sorts by distance; only one we cannot narrows
+            admin_unit=None if origin is not None else admin_unit,
             text=text,
             near=origin,
             radius_km=radius_km,
