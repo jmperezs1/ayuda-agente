@@ -68,7 +68,31 @@ make run                                  # http://127.0.0.1:8000
 ```
 
 `OPENAI_API_KEY` va en `backend/.env` — el pipeline lee las publicaciones con ella. `APIFY_TOKEN`
-solo hace falta para cosechar publicaciones nuevas. `make help` lista todos los comandos.
+solo hace falta para cosechar publicaciones nuevas. `--limit 25` es lo que hace barato el `pipeline`;
+quítalo para leer las 939.
+
+Consultar la API con la clave que minteó `make apikey`:
+
+```bash
+curl -H "X-API-Key: <clave>" http://127.0.0.1:8000/api/events/1/requirements/
+```
+
+El resto de comandos útiles — `make help` los lista todos:
+
+```bash
+make narrate                              # ver el pipeline según ocurre (arráncalo antes que pipeline)
+make superuser                            # y el admin de Django en /admin/
+make unseed                               # quita las fixtures, deja taxonomía y gazetteer
+make check                                # ruff + estilo de comentarios + pyrefly + pytest
+
+make watch                                # sondea USGS: propone eventos en pausa, no gasta nada
+make events                               # qué hay esperando y qué puede gastar
+make arm ARGS="<id>"                      # autoriza un evento real y encola su primer barrido
+make worker                               # y `make beat` en otra terminal
+```
+
+**Ojo antes de dejarlo suelto:** el evento piloto viene activo, así que un bucle en marcha lo
+cosecharía de verdad. `make unseed` primero.
 
 ### 2. Frontend — [README](https://github.com/juanse-ai/ayuda-agente#readme)
 
@@ -89,6 +113,19 @@ hable con el backend que acabas de levantar, escribe `frontend/.env`:
 ```bash
 VITE_API_BASE_URL=http://127.0.0.1:8000
 VITE_API_KEY=…                            # la que devolvió `make apikey`
+```
+
+Son las dos únicas variables. **Solo se expone al navegador lo que empieza por `VITE_`**, y
+`VITE_API_KEY` viaja en la cabecera `X-API-Key` de cada petición: lo que llega al navegador es
+público, así que debe ser una clave de solo lectura y revocable. Sin ella, todo `/api/` responde 401.
+
+El resto de comandos:
+
+```bash
+npm run build                             # tsc -b && vite build
+npm run preview                           # sirve el build de producción
+npm run lint                              # oxlint
+npm run format                            # prettier --write .
 ```
 
 ---
