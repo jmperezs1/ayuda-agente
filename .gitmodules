@@ -1,6 +1,6 @@
-[submodule "origins/backend"]
-	path = origins/backend
+[submodule "backend"]
+	path = backend
 	url = https://github.com/djimenezm2/back-hackaton-CTW-2026.git
-[submodule "origins/frontend"]
-	path = origins/frontend
+[submodule "frontend"]
+	path = frontend
 	url = https://github.com/juanse-ai/ayuda-agente.git
