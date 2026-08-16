@@ -1,0 +1,251 @@
+{
+  "about": "Assertions over real pilot posts, used to tell whether a prompt change helped or hurt. Each case pins one behaviour that was observed to break, so a regression is a failing case rather than an impression formed by reading a handful of outputs.",
+  "event": "Chocó earthquake M7.4",
+  "cases": [
+    {
+      "id": "political-argument",
+      "platform": "x",
+      "platform_id": "2088674583603765608",
+      "why": "Argument about politicised aid distribution: high engagement, zero actionability, and a large share of the raw volume.",
+      "expect": {
+        "classification": "discard",
+        "max_items": 0
+      }
+    },
+    {
+      "id": "other-disaster-venezuela",
+      "platform": "x",
+      "platform_id": "2088719513793495149",
+      "why": "Another country's earthquake in the same language. The lexicon negatives exist for exactly this.",
+      "expect": {
+        "belongs_to_event": false,
+        "classification": "discard",
+        "max_items": 0
+      }
+    },
+    {
+      "id": "other-disaster-peru-hypothetical",
+      "platform": "x",
+      "platform_id": "2088634486229496122",
+      "why": "Speculation about a future Peruvian quake. Shares every keyword and describes no real need.",
+      "expect": {
+        "belongs_to_event": false,
+        "max_items": 0
+      }
+    },
+    {
+      "id": "news-coverage",
+      "platform": "x",
+      "platform_id": "2088335697975423142",
+      "why": "Press reporting on debris removal. It names a family whose house collapsed, but nobody asks for anything — inferring a need from described damage manufactures demand that was never requested.",
+      "expect": {
+        "classification": "discard",
+        "max_items": 0
+      }
+    },
+    {
+      "id": "collection-point-with-address",
+      "platform": "x",
+      "platform_id": "2088392624088535342",
+      "why": "The canonical supply item: a collection point with a street address.",
+      "expect": {
+        "classification_in": [
+          "offer",
+          "both"
+        ],
+        "min_items": 1,
+        "items_any": [
+          {
+            "direction": "offers",
+            "has_contact_kind": "street_address"
+          }
+        ],
+        "geocode_contains": "Bogot"
+      }
+    },
+    {
+      "id": "transport-truck-to-pereira",
+      "platform": "x",
+      "platform_id": "2088664993294098918",
+      "why": "A truck leaving tomorrow. Transport is the resource that makes three-node matches possible.",
+      "expect": {
+        "classification_in": [
+          "offer",
+          "both"
+        ],
+        "items_any": [
+          {
+            "direction": "offers",
+            "resource_key_in": [
+              "transport",
+              "logistics"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "transport-buses-with-phone",
+      "platform": "x",
+      "platform_id": "2087364257214062824",
+      "why": "Private individual offering buses, with a phone number in the body.",
+      "expect": {
+        "classification_in": [
+          "offer",
+          "both"
+        ],
+        "items_any": [
+          {
+            "direction": "offers",
+            "resource_key_in": [
+              "transport",
+              "logistics"
+            ],
+            "has_contact_kind": "phone"
+          }
+        ]
+      }
+    },
+    {
+      "id": "payment-rail",
+      "platform": "x",
+      "platform_id": "2087959071253012561",
+      "why": "A Bre-B key and a Nequi account. Payment rails are country specific and must land as one kind with the network as data.",
+      "expect": {
+        "min_items": 1,
+        "items_any": [
+          {
+            "has_contact_kind": "payment"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rural-indigenous-reserve",
+      "platform": "facebook",
+      "platform_id": "4030457070581817",
+      "why": "Wounaan communities in the Tocordo Balsalito reserve. The long tail no other platform surfaced.",
+      "expect": {
+        "classification_in": [
+          "need",
+          "both",
+          "discard"
+        ],
+        "geocode_contains": "Choc"
+      }
+    },
+    {
+      "id": "rural-womens-organisation",
+      "platform": "facebook",
+      "platform_id": "1346233654330264",
+      "why": "A rural district of Buenaventura, named at a granularity a gazetteer barely reaches.",
+      "expect": {
+        "geocode_contains": "Buenaventura"
+      }
+    },
+    {
+      "id": "demand-several-municipalities",
+      "platform": "x",
+      "platform_id": "2088391392213053559",
+      "why": "One post naming four municipalities at once, which is where a single-location assumption breaks.",
+      "expect": {
+        "classification_in": [
+          "need",
+          "both"
+        ],
+        "min_items": 1,
+        "items_any": [
+          {
+            "direction": "needs"
+          }
+        ]
+      }
+    },
+    {
+      "id": "comment-asking-for-volunteers",
+      "platform": "tiktok",
+      "platform_id": "7673269597525279510",
+      "why": "A comment asking whether volunteers are still needed. Blocked supply, and the case that justifies mining comments at all.",
+      "expect": {
+        "classification_in": [
+          "need",
+          "offer",
+          "both"
+        ],
+        "min_items": 1
+      }
+    },
+    {
+      "id": "animal-shelters-with-phone",
+      "platform": "x",
+      "platform_id": "2088421301518062022",
+      "why": "Two destroyed dog shelters asking for construction material, with a contact.",
+      "expect": {
+        "classification_in": [
+          "need",
+          "both"
+        ],
+        "min_items": 1,
+        "items_any": [
+          {
+            "direction": "needs"
+          }
+        ]
+      }
+    },
+    {
+      "id": "blankets-and-hands",
+      "platform": "x",
+      "platform_id": "2088722737007153664",
+      "why": "Blankets plus volunteers plus a phone, in a single informal message.",
+      "expect": {
+        "min_items": 1,
+        "items_any": [
+          {
+            "has_contact_kind": "phone"
+          }
+        ]
+      }
+    },
+    {
+      "id": "question-asking-where-to-donate",
+      "platform": "instagram",
+      "platform_id": "17902949706327087",
+      "why": "'Centro de acopio en Bogotá?' is somebody looking for a place to donate. Reading it as a need inverts who needs help: the would-be donor becomes a point asking for donations.",
+      "expect": {
+        "classification": "discard",
+        "max_items": 0
+      }
+    },
+    {
+      "id": "question-asking-whether-help-is-still-wanted",
+      "platform": "tiktok",
+      "platform_id": "7672729411691643655",
+      "why": "'Sabes hasta qué hora se necesitan voluntarios en multiplaza?' asks about an existing need rather than stating one. The volunteering need belongs to whoever posted the original call.",
+      "expect": {
+        "classification": "discard",
+        "max_items": 0
+      }
+    },
+    {
+      "id": "question-that-carries-an-offer",
+      "platform": "tiktok",
+      "platform_id": "7672937104633037576",
+      "why": "'Hay forma de ser voluntario sin ser del sector salud? Soy estudiante de arquitectura' is a question in grammar and an offer in substance. Guards the discard rule above from swallowing real volunteers.",
+      "expect": {
+        "classification": "offer",
+        "min_items": 1
+      }
+    },
+    {
+      "id": "question-that-carries-both-sides",
+      "platform": "tiktok",
+      "platform_id": "7673282336221840136",
+      "why": "'Alguien sabe de algún camión que vaya el finde? Para enviar' is a need for transport and an offer of goods, asked as one question.",
+      "expect": {
+        "classification": "both",
+        "min_items": 1
+      }
+    }
+  ]
+}

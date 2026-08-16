@@ -1,0 +1,85 @@
+{
+  "event": {
+    "hazard": "earthquake",
+    "name": "Chocó earthquake M7.4",
+    "occurred_at": "2026-08-10T12:34:27Z",
+    "epicenter": [-76.29, 4.99],
+    "magnitude": 7.4,
+    "depth_km": 103.0,
+    "country_code": "CO",
+    "languages": ["es"],
+    "detection_source": "usgs",
+    "external_id": "us6000tjl2",
+    "lexicon": {
+      "hashtags": ["TerremotoColombia", "SismoColombia", "FuerzaColombia"],
+      "nicknames": ["terremoto del Chocó", "sismo del 10 de agosto"],
+      "negatives": ["Venezuela", "Indonesia", "Granada", "Perú", "Ecuador"]
+    }
+  },
+  "harvested_at": "2026-08-15",
+  "total_items": 939,
+  "total_cost_usd": 1.32,
+  "files": [
+    {
+      "file": "x.json.gz",
+      "platform": "x",
+      "items": 400,
+      "dataset_id": "U5CF9uXzoa0llyVrk",
+      "apify_actor": "kaitoeasyapi/twitter-x-data-tweet-scraper-pay-per-result-cheapest",
+      "cost_usd": 0.1,
+      "note": "10 batched queries across both axes, demand and supply"
+    },
+    {
+      "file": "instagram.json.gz",
+      "platform": "instagram",
+      "items": 112,
+      "dataset_id": "t1sIJuflThvsohffL",
+      "apify_actor": "apify/instagram-hashtag-scraper",
+      "cost_usd": 0.2912,
+      "note": "5 hashtags; this actor has no date filter, so 2 items predate the event"
+    },
+    {
+      "file": "facebook_choco.json.gz",
+      "platform": "facebook",
+      "items": 17,
+      "dataset_id": "aRuRTb6BkFKEwjAch",
+      "apify_actor": "scraper_one/facebook-posts-search",
+      "note": "demand axis, Chocó and Quibdó"
+    },
+    {
+      "file": "facebook_acopio.json.gz",
+      "platform": "facebook",
+      "items": 41,
+      "dataset_id": "zPRSRH0KJegP0dlNw",
+      "apify_actor": "scraper_one/facebook-posts-search",
+      "note": "supply axis, collection points"
+    },
+    {
+      "file": "facebook_veredas.json.gz",
+      "platform": "facebook",
+      "items": 42,
+      "dataset_id": "QsJLIZepcxbpiROCp",
+      "apify_actor": "scraper_one/facebook-posts-search",
+      "note": "rural long tail; the only query that surfaced Herveo and the Wounaan reserve"
+    },
+    {
+      "file": "tiktok.json.gz",
+      "platform": "tiktok",
+      "items": 100,
+      "dataset_id": "wIyujbVeuIUKZDGWZ",
+      "apify_actor": "clockworks/tiktok-scraper",
+      "cost_usd": 0.371,
+      "note": "failover target; apidojo/tiktok-scraper returned noResults for every query"
+    },
+    {
+      "file": "tiktok_comments.json.gz",
+      "platform": "tiktok",
+      "items": 227,
+      "dataset_id": "FxTsEnptzujEnYWxa",
+      "apify_actor": "clockworks/tiktok-comments-scraper",
+      "cost_usd": 0.2838,
+      "is_comment": true,
+      "note": "comments on 5 high-engagement local videos"
+    }
+  ]
+}

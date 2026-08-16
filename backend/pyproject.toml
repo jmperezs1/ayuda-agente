@@ -1,0 +1,76 @@
+[project]
+name = "back-hackaton-ctw-2026"
+version = "0.1.0"
+description = "Django + PostgreSQL backend"
+requires-python = ">=3.12"
+dependencies = [
+    "apify-client>=3.1.2",
+    "celery[redis]>=5.6.3",
+    "deepagents>=0.7.6",
+    "django-cors-headers>=4.9.0",
+    "django-storages[azure]>=1.14.6",
+    "django[gis]>=5.0,<6.0",
+    "gunicorn>=23.0.0",
+    "langchain-mcp-adapters>=0.3.2",
+    "langchain-openai>=1.5.1",
+    "langgraph>=1.2.11",
+    "langgraph-checkpoint-postgres>=2.0.0",
+    "networkx>=3.6.1",
+    "pgvector>=0.5.0",
+    "phonenumbers>=9.0.37",
+    "psycopg[binary]>=3.3.4",
+    "python-dotenv>=1.0",
+    "python-slugify>=8.0.4",
+    "redis>=6.4.0",
+    "scipy>=1.18.0",
+]
+
+[dependency-groups]
+dev = [
+    "django-stubs>=6.1.0",
+    "pyrefly>=1.2.0",
+    "pytest>=9.1.1",
+    "pytest-django>=4.14.0",
+    "ruff>=0.16.3",
+    "types-networkx>=3.6.1.20260728",
+]
+
+[tool.ruff]
+line-length = 100
+src = ["."]
+# Django writes these, and reformatting them makes every migration diff unreadable.
+extend-exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+# No `D`: the repo documents in sectioned prose, which those rules only fight.
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+# Django's `Meta` is a declarative API read once at class creation, so its lists are not
+# the mutable shared state RUF012 is about.
+"*/models/*.py" = ["RUF012"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["agent_tools", "ayudagente", "backend"]
+
+[tool.pyrefly]
+project-includes = ["agent_tools", "ayudagente", "backend"]
+# Generated code, and the only place `models` is imported for its side effects alone.
+project-excludes = ["**/migrations/**"]
+# Matches `requires-python`, not the local interpreter, so 3.13+ syntax gets flagged here.
+python-version = "3.12"
+# Warnings shown too: deprecations rot invisibly under the default `error` floor.
+min-severity = "warn"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "backend.settings"
+# Tests live next to the code they cover, so discovery starts at the product package.
+testpaths = ["agent_tools", "ayudagente"]
+python_files = ["test_*.py", "tests.py"]
+
+# The default run needs no external service. Anything that reaches Postgres, Azure or
+# Apify is opt-in: `uv run pytest -m live`.
+addopts = ["-m", "not live"]
+markers = [
+    "live: needs a real external service (reads its address from the environment)",
+]
